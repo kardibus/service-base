@@ -10,6 +10,12 @@ public class Brand {
     private Long id;
     private String brand;
 
+    public Brand(){}
+
+    public Brand(String brand) {
+        this.brand = brand;
+    }
+
     public Long getId() {
         return id;
     }
