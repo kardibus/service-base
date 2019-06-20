@@ -10,6 +10,12 @@ public class Model {
     private Long id;
     private String model;
 
+    public Model(){}
+
+    public Model(String model) {
+        this.model = model;
+    }
+
     public Long getId() {
         return id;
     }

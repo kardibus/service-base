@@ -29,6 +29,21 @@ public class Order {
 
     private String defects;
 
+    public Order(){}
+
+    public Order(Set<StatusOrder> statusOrder, int price, String serialnumber, String about_repair, String defects, LocalDateTime date_Open, LocalDateTime date_Close, Users users_id, Model model_id, Brand brand_id) {
+        this.statusOrder = statusOrder;
+        this.price = price;
+        this.serialnumber = serialnumber;
+        this.about_repair = about_repair;
+        this.defects = defects;
+        this.date_Open = date_Open;
+        this.date_Close = date_Close;
+        this.users_id = users_id;
+        this.model_id = model_id;
+        this.brand_id = brand_id;
+    }
+
     @CreationTimestamp
     private LocalDateTime date_Open;
     @CreationTimestamp

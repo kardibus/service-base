@@ -16,7 +16,16 @@ public class Users{
     private String numberTwo;
     private String numberThree;
 
+    public Users(){}
 
+    public Users(String name, String surname, String patronymic, String numberOne, String numberTwo, String numberThree) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.numberOne = numberOne;
+        this.numberTwo = numberTwo;
+        this.numberThree = numberThree;
+    }
 
     public Long getId() {
         return id;
