@@ -20,14 +20,14 @@ public class BrandController {
 private BrandRepository brandRepository;
 
     @GetMapping("/brand")
-    public String brandPage(@RequestParam(required = false,defaultValue="")String name, Model model){
+    public String brandPage(Map<String,Object> model){
         Iterable<Brand> message=brandRepository.findAll();
-        model.addAttribute("message",message);
+        model.put("message",message);
         return "brand";
     }
 
     @PostMapping("/addBrand")
-    public String addBrand(@RequestParam String brand, Map<String,Object> model){
+    public String addBrand(@RequestParam(name="brand") String brand, Map<String,Object> model){
         Brand brandData = new Brand(brand);
         brandRepository.save(brandData);
         Iterable<Brand>message=brandRepository.findAll();

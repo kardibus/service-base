@@ -18,7 +18,7 @@ public class ModelController {
     private ModelRepository modelRepository;
 
     @GetMapping("/model")
-    public String modelPage(@RequestParam(required = false,defaultValue = "")String name, Map<String,Object>model){
+    public String modelPage(Map<String,Object>model){
         Iterable<Model> message=modelRepository.findAll();
         model.put("message",message);
         return "model";
