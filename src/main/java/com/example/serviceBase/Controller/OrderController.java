@@ -31,7 +31,7 @@ public class OrderController {
     }
 
     @PostMapping("/addOrder")
-    public String addUsers(@RequestParam(name="price") Set<StatusOrder> statusOrder,
+    public String addUsers(@RequestParam(name="statusorder") Set<StatusOrder> statusOrder,
                            @RequestParam(name="price") int price,
                            @RequestParam(name="serialnumber")String serialnumber,
                            @RequestParam(name="about_repair")String about_repair,
@@ -49,32 +49,40 @@ public class OrderController {
         return "order";
     }
 
-    @PostMapping("/deleteUsers/{id}")
+    @PostMapping("/deleteOrder/{id}")
     public String deleteBrand(@PathVariable(value="id",required=false) Long id, Map<String,Object>model){
-        userRepository.deleteById(id);
-        Iterable<Users> message=userRepository.findAll();
+        orderRepository.deleteById(id);
+        Iterable<Order> message=orderRepository.findAll();
         model.put("message",message);
-        return "users";
+        return "order";
     }
 
-    @PostMapping("/updateUsers/{id}")
-    public String updateBrand(@PathVariable(value = "id",required = false) Users usersId,
-                              @RequestParam(name="name") String name,
-                              @RequestParam(name="surname")String surname,
-                              @RequestParam(name="patronymic")String patronymic,
-                              @RequestParam(name="numberOne")String numberOne,
-                              @RequestParam(name="numberTwo")String numberTwo,
-                              @RequestParam(name="numberThree")String numberThree,
+    @PostMapping("/updateOrder/{id}")
+    public String updateBrand(@PathVariable(value = "id",required = false)  Order orderId,
+                              @RequestParam(name="price") int price,
+                              @RequestParam(name="serialnumber")String serialnumber,
+                              @RequestParam(name="about_repair")String about_repair,
+                              @RequestParam(name="defects")String defects,
+                              @RequestParam(name="date_Open")LocalDateTime date_Open,
+                              @RequestParam(name="date_Close")LocalDateTime date_Close,
+                              @RequestParam(name="users_id")Users users_id,
+                              @RequestParam(name="model_id")Model model_id,
+                              @RequestParam(name="brand_id")Brand brand_id,
+                              @RequestParam(name="statusorder")Set<StatusOrder>statusOrders,
                               Map<String,Object>model){
-        usersId.setName(name);
-        usersId.setSurname(surname);
-        usersId.setPatronymic(patronymic);
-        usersId.setNumberOne(numberOne);
-        usersId.setNumberTwo(numberTwo);
-        usersId.setNumberThree(numberThree);
-        userRepository.save(usersId);
-        Iterable<Users> message=userRepository.findAll();
+        orderId.setPrice(price);
+        orderId.setSerialnumber(serialnumber);
+        orderId.setAbout_repair(about_repair);
+        orderId.setDefects(defects);
+        orderId.setDate_Open(date_Open);
+        orderId.setDate_Close(date_Close);
+        orderId.setUsers_id(users_id);
+        orderId.setModel_id(model_id);
+        orderId.setBrand_id(brand_id);
+        orderId.setStatusOrder(statusOrders);
+        orderRepository.save(orderId);
+        Iterable<Order> message=orderRepository.findAll();
         model.put("message",message);
-        return "users";
+        return "order";
     }
 }
