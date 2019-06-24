@@ -5,7 +5,7 @@ import com.example.serviceBase.Entity.Model;
 import com.example.serviceBase.Entity.Order;
 import com.example.serviceBase.Entity.Users;
 import com.example.serviceBase.Repository.OrderRepository;
-import com.example.serviceBase.Repository.StatusOrder;
+import com.example.serviceBase.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,23 +15,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class OrderController {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     @GetMapping("/order")
     public String orderPage(Map<String,Object> model) {
         Iterable<Order> message = orderRepository.findAll();
+        Iterable<Users> messageUsers =userRepository.findAll();
+        model.put("messageUsers",messageUsers);
         model.put("message", message);
         return "order";
     }
 
     @PostMapping("/addOrder")
-    public String addUsers(@RequestParam(name="statusorder") Set<StatusOrder> statusOrder,
+    public String addOrder(@RequestParam(name="statusorder") String statusOrder,
                            @RequestParam(name="price") int price,
                            @RequestParam(name="serialnumber")String serialnumber,
                            @RequestParam(name="about_repair")String about_repair,
@@ -45,20 +49,24 @@ public class OrderController {
         Order orderData = new Order(statusOrder,price,serialnumber,about_repair,defects,date_Open,date_Close,users_id,model_id,brand_id);
         orderRepository.save(orderData);
         Iterable<Order>message=orderRepository.findAll();
+        Iterable<Users> messageUsers =userRepository.findAll();
+        model.put("messageUsers",messageUsers);
         model.put("message",message);
         return "order";
     }
 
     @PostMapping("/deleteOrder/{id}")
-    public String deleteBrand(@PathVariable(value="id",required=false) Long id, Map<String,Object>model){
+    public String deleteOrder(@PathVariable(value="id",required=false) Long id, Map<String,Object>model){
         orderRepository.deleteById(id);
         Iterable<Order> message=orderRepository.findAll();
+        Iterable<Users> messageUsers =userRepository.findAll();
+        model.put("messageUsers",messageUsers);
         model.put("message",message);
         return "order";
     }
 
     @PostMapping("/updateOrder/{id}")
-    public String updateBrand(@PathVariable(value = "id",required = false)  Order orderId,
+    public String updateOrder(@PathVariable(value = "id",required = false)  Order orderId,
                               @RequestParam(name="price") int price,
                               @RequestParam(name="serialnumber")String serialnumber,
                               @RequestParam(name="about_repair")String about_repair,
@@ -68,7 +76,7 @@ public class OrderController {
                               @RequestParam(name="users_id")Users users_id,
                               @RequestParam(name="model_id")Model model_id,
                               @RequestParam(name="brand_id")Brand brand_id,
-                              @RequestParam(name="statusorder")Set<StatusOrder>statusOrders,
+                              @RequestParam(name="statusorder")String statusOrders,
                               Map<String,Object>model){
         orderId.setPrice(price);
         orderId.setSerialnumber(serialnumber);
@@ -82,6 +90,8 @@ public class OrderController {
         orderId.setStatusOrder(statusOrders);
         orderRepository.save(orderId);
         Iterable<Order> message=orderRepository.findAll();
+        Iterable<Users> messageUsers =userRepository.findAll();
+        model.put("messageUsers",messageUsers);
         model.put("message",message);
         return "order";
     }

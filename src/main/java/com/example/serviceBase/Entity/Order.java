@@ -1,7 +1,6 @@
 package com.example.serviceBase.Entity;
 
 
-import com.example.serviceBase.Repository.StatusOrder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -16,10 +15,7 @@ public class Order {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @ElementCollection(targetClass = StatusOrder.class,fetch = FetchType.EAGER)
-    @CollectionTable(name="order_status",joinColumns=@JoinColumn(name="order_status"))
-    @Enumerated(EnumType.STRING)
-    private Set<StatusOrder>statusOrder;
+    private String statusOrder;
 
     private int price;
 
@@ -31,7 +27,7 @@ public class Order {
 
     public Order(){}
 
-    public Order(Set<StatusOrder> statusOrder, int price, String serialnumber, String about_repair, String defects, LocalDateTime date_Open, LocalDateTime date_Close, Users users_id, Model model_id, Brand brand_id) {
+    public Order(String statusOrder, int price, String serialnumber, String about_repair, String defects, LocalDateTime date_Open, LocalDateTime date_Close, Users users_id, Model model_id, Brand brand_id) {
         this.statusOrder = statusOrder;
         this.price = price;
         this.serialnumber = serialnumber;
@@ -69,11 +65,11 @@ public class Order {
         this.id = id;
     }
 
-    public Set<StatusOrder> getStatusOrder() {
+    public String getStatusOrder() {
         return statusOrder;
     }
 
-    public void setStatusOrder(Set<StatusOrder> statusOrder) {
+    public void setStatusOrder(String statusOrder) {
         this.statusOrder = statusOrder;
     }
 
