@@ -4,6 +4,8 @@ import com.example.serviceBase.Entity.Brand;
 import com.example.serviceBase.Entity.Model;
 import com.example.serviceBase.Entity.Order;
 import com.example.serviceBase.Entity.Users;
+import com.example.serviceBase.Repository.BrandRepository;
+import com.example.serviceBase.Repository.ModelRepository;
 import com.example.serviceBase.Repository.OrderRepository;
 import com.example.serviceBase.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,33 +25,44 @@ public class OrderController {
     private OrderRepository orderRepository;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private ModelRepository modelRepository;
+    @Autowired
+    private BrandRepository brandRepository;
 
     @GetMapping("/order")
     public String orderPage(Map<String,Object> model) {
         Iterable<Order> message = orderRepository.findAll();
         Iterable<Users> messageUsers =userRepository.findAll();
+        Iterable<Model> messageModel =modelRepository.findAll();
+        Iterable<Brand> messageBrand =brandRepository.findAll();
+        model.put("messageBrand",messageBrand);
+        model.put("messageModel",messageModel);
         model.put("messageUsers",messageUsers);
         model.put("message", message);
         return "order";
     }
 
     @PostMapping("/addOrder")
-    public String addOrder(@RequestParam(name="statusorder") String statusOrder,
-                           @RequestParam(name="price") int price,
-                           @RequestParam(name="serialnumber")String serialnumber,
-                           @RequestParam(name="about_repair")String about_repair,
-                           @RequestParam(name="defects")String defects,
-                           @RequestParam(name="date_Open") LocalDateTime date_Open,
-                           @RequestParam(name="date_Close")LocalDateTime date_Close,
-                           @RequestParam(name="users_id")Users users_id,
-                           @RequestParam(name="model_id") Model model_id,
-                           @RequestParam(name="brand_id") Brand brand_id,
+    public String addOrder(@RequestParam int price,
+                           @RequestParam String serialnumber,
+                           @RequestParam String about_repair,
+                           @RequestParam String defects,
+                           @RequestParam LocalDateTime date_Open,
+                           @RequestParam LocalDateTime date_Close,
+                           @RequestParam Users users_id,
+                           @RequestParam Model model_id,
+                           @RequestParam Brand brand_id,
+                           @RequestParam String statusOrder,
                            Map<String,Object> model){
         Order orderData = new Order(statusOrder,price,serialnumber,about_repair,defects,date_Open,date_Close,users_id,model_id,brand_id);
         orderRepository.save(orderData);
         Iterable<Order>message=orderRepository.findAll();
         Iterable<Users> messageUsers =userRepository.findAll();
+        Iterable<Model> messageModel =modelRepository.findAll();
+        Iterable<Brand> messageBrand =brandRepository.findAll();
+        model.put("messageBrand",messageBrand);
+        model.put("messageModel",messageModel);
         model.put("messageUsers",messageUsers);
         model.put("message",message);
         return "order";
@@ -60,6 +73,10 @@ public class OrderController {
         orderRepository.deleteById(id);
         Iterable<Order> message=orderRepository.findAll();
         Iterable<Users> messageUsers =userRepository.findAll();
+        Iterable<Model> messageModel =modelRepository.findAll();
+        Iterable<Brand> messageBrand =brandRepository.findAll();
+        model.put("messageBrand",messageBrand);
+        model.put("messageModel",messageModel);
         model.put("messageUsers",messageUsers);
         model.put("message",message);
         return "order";
@@ -91,6 +108,10 @@ public class OrderController {
         orderRepository.save(orderId);
         Iterable<Order> message=orderRepository.findAll();
         Iterable<Users> messageUsers =userRepository.findAll();
+        Iterable<Model> messageModel =modelRepository.findAll();
+        Iterable<Brand> messageBrand =brandRepository.findAll();
+        model.put("messageBrand",messageBrand);
+        model.put("messageModel",messageModel);
         model.put("messageUsers",messageUsers);
         model.put("message",message);
         return "order";

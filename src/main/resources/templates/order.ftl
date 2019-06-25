@@ -27,22 +27,39 @@
             <div class="form-group">
                 <input type="text" class="form-control" name="date_Close" placeholder="Дата окончания ремонта">
             </div>
+            <div class="form-group" >
+                <input type="hidden" class="form-control" name="model_id" placeholder="Модел" id="modeldata">
+            </div>
+            <div class="form-group" >
+                <input type="hidden" class="form-control" name="users_id" placeholder="Клиент" id="userdata">
+            </div>
+            <div class="form-group" >
+                <input type="hidden" class="form-control" name="brand_id" placeholder="Бранд" id="branddata">
+            </div>
+
             <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect02">
-                    <option selected>Клиент</option>
+                <select class="custom-select" id="inputGroupSelect01" onchange="User()">
                     <#list messageUsers as messagesUser>
-                    <option name="users_id">${messagesUser.surname}</option>
+                    <option value="${messagesUser.id}">${messagesUser.surname}</option>
                     </#list>
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="model_id" placeholder="Модель">
+                <select class="custom-select" id="inputGroupSelect02" onchange="Model()">
+                    <#list messageModel as messagesModel>
+                        <option value="${messagesModel.id}">${messagesModel.model}</option>
+                    </#list>
+                </select>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="brand_id" placeholder="Марка">
+                <select class="custom-select" id="inputGroupSelect03" onchange="Brand()">
+                    <#list messageBrand as messagesBrand>
+                        <option value="${messagesBrand.id}">${messagesBrand.brand}</option>
+                    </#list>
+                </select>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="statusorder" placeholder="Статус заказа">
+                <input type="text" class="form-control" name="statusOrder" placeholder="Статус заказа">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Добавить</button>
@@ -82,7 +99,7 @@
             <td>${messages.date_Open}</td>
             <td>${messages.date_Close}</td>
             <td>${messages.statusOrder}</td>
-            <td>${messages.users_id.name}</td>
+            <td>${messages.users_id.surname}</td>
             <td>${messages.model_id.model}</td>
             <td>${messages.brand_id.brand}</td>
             <td>${messages.defects}</td>
