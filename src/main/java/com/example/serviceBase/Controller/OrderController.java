@@ -50,9 +50,9 @@ public class OrderController {
                            @RequestParam String defects,
                            @RequestParam LocalDateTime date_Open,
                            @RequestParam LocalDateTime date_Close,
-                           @RequestParam Users users_id,
-                           @RequestParam Model model_id,
-                           @RequestParam Brand brand_id,
+                           @RequestParam(name="users_id") Users users_id,
+                           @RequestParam(name="model_id")Model model_id,
+                           @RequestParam(name="brand_id") Brand brand_id,
                            @RequestParam String statusOrder,
                            Map<String,Object> model){
         Order orderData = new Order(statusOrder,price,serialnumber,about_repair,defects,date_Open,date_Close,users_id,model_id,brand_id);

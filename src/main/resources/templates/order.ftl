@@ -1,5 +1,22 @@
 <#include "parts/head.ftl">
 
+<script>
+        function U() {
+            var a = document.getElementById('inputGroupSelect01').value;
+            document.getElementById('userdata1').value = a;
+        };
+
+        function M() {
+            var a = document.getElementById('inputGroupSelect02').value;
+            document.getElementById('modeldata1').value = a;
+        };
+
+        function B() {
+            var a = document.getElementById('inputGroupSelect03').value;
+            document.getElementById('branddata1').value = a;
+        };
+    </script>
+
 <a class="btn btn-primary mt-3 mb-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Добавить квитанцию
 </a>
@@ -28,31 +45,34 @@
                 <input type="text" class="form-control" name="date_Close" placeholder="Дата окончания ремонта">
             </div>
             <div class="form-group" >
-                <input type="hidden" class="form-control" name="model_id" placeholder="Модел" id="modeldata">
+                <input type="text" class="form-control" name="model_id" placeholder="Модел" id="modeldata1">
             </div>
             <div class="form-group" >
-                <input type="hidden" class="form-control" name="users_id" placeholder="Клиент" id="userdata">
+                <input type="text" class="form-control" name="users_id" placeholder="Клиент" id="userdata1">
             </div>
             <div class="form-group" >
-                <input type="hidden" class="form-control" name="brand_id" placeholder="Бранд" id="branddata">
+                <input type="text" class="form-control" name="brand_id" placeholder="Бренд" id="branddata1">
             </div>
 
             <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect01" onchange="User()">
+                <select class="custom-select" id="inputGroupSelect01" onchange="U()">
+                    <option selected>Выберите владельца</option>
                     <#list messageUsers as messagesUser>
                     <option value="${messagesUser.id}">${messagesUser.surname}</option>
                     </#list>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect02" onchange="Model()">
+                <select class="custom-select" id="inputGroupSelect02" onchange="M()">
+                    <option selected>Выберите владельца</option>
                     <#list messageModel as messagesModel>
                         <option value="${messagesModel.id}">${messagesModel.model}</option>
                     </#list>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect03" onchange="Brand()">
+                <select class="custom-select" id="inputGroupSelect03" onchange="B()">
+                    <option selected>Выберите владельца</option>
                     <#list messageBrand as messagesBrand>
                         <option value="${messagesBrand.id}">${messagesBrand.brand}</option>
                     </#list>
