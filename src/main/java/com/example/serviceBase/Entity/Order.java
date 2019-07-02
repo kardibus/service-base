@@ -1,11 +1,15 @@
 package com.example.serviceBase.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Set;
+
 
 
 @Entity
@@ -27,7 +31,7 @@ public class Order {
 
     public Order(){}
 
-    public Order(String statusOrder, int price, String serialnumber, String about_repair, String defects, LocalDateTime date_Open, LocalDateTime date_Close, Users users_id, Model model_id, Brand brand_id) {
+    public Order(String statusOrder, int price, String serialnumber, String about_repair, String defects, Timestamp date_Open, Timestamp date_Close, Users users_id, Model model_id, Brand brand_id) {
         this.statusOrder = statusOrder;
         this.price = price;
         this.serialnumber = serialnumber;
@@ -40,10 +44,12 @@ public class Order {
         this.brand_id = brand_id;
     }
 
+
+
     @CreationTimestamp
-    private LocalDateTime date_Open;
+    private Timestamp date_Open;
     @CreationTimestamp
-    private LocalDateTime date_Close;
+    private Timestamp date_Close;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
@@ -105,19 +111,20 @@ public class Order {
         this.defects = defects;
     }
 
-    public LocalDateTime getDate_Open() {
+    public Timestamp getDate_Open() {
         return date_Open;
     }
 
-    public void setDate_Open(LocalDateTime date_Open) {
+    public void setDate_Open(Timestamp date_Open)
+    {
         this.date_Open = date_Open;
     }
 
-    public LocalDateTime getDate_Close() {
+    public Timestamp getDate_Close() {
         return date_Close;
     }
 
-    public void setDate_Close(LocalDateTime date_Close) {
+    public void setDate_Close(Timestamp date_Close) {
         this.date_Close = date_Close;
     }
 
@@ -144,4 +151,5 @@ public class Order {
     public void setBrand_id(Brand brand_id) {
         this.brand_id = brand_id;
     }
+
 }
