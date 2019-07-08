@@ -6,6 +6,7 @@
             document.getElementById('userdata1').value = a;
             var date =new Date();
             var result=date.getFullYear() +"-"+ date.getMonth()+"-"+ date.getDate()+" "+ date.getHours()+":"+ date.getMinutes()+":"+ date.getSeconds();
+            document.getElementById('dateClose').value= result;
             document.getElementById('dateOpen').value = result;
         };
 
@@ -18,6 +19,11 @@
             var a = document.getElementById('inputGroupSelect03').value;
             document.getElementById('branddata1').value = a;
         };
+        function C() {
+            var a = document.getElementById('inputGroupSelect04').value;
+            document.getElementById('status').value = a;
+        }
+
     </script>
      <script src="js/main.js"></script>
 <#include  "parts/orderTableAdd.ftl">
@@ -57,7 +63,7 @@
             <td>${messages.model_id.model}</td>
             <td>${messages.brand_id.brand}</td>
             <td>${messages.defects}</td>
-            <td><a class="btn btn-primary mb-3"  data-toggle="collapse" href="#collapseExample${messages.id}" role="button" aria-expanded="false" aria-controls="collapseExample${messages.id}">
+            <td><a class="btn btn-primary mb-3"  data-toggle="collapse" href="#collapseExample${messages.id}" role="button" aria-expanded="false" aria-controls="collapseExample${messages.id}" ">
                     Редактировать
                 </a>
                 <div class="collapse" id="collapseExample${messages.id}">
@@ -73,28 +79,28 @@
                                 <input type="text" class="form-control" name="serialnumber" value="${messages.serialnumber}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="date_Open" value="${messages.date_Open}">
+                                <input type="text" class="form-control" name="date_Open" value="${messages.date_Open?string("yyyy-MM-dd HH:mm:ss")}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="date_Close" value="${messages.date_Close}">
+                                <input type="text" class="form-control" name="date_Close" value="${messages.date_Close?string("yyyy-MM-dd HH:mm:ss")}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="statusorder" value="${messages.statusOrder}">
+                                <input type="text" class="form-control" name="statusOrder" value="${messages.statusOrder}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="users_id" value="${messages.users_id.name}">
+                                <input type="text" class="form-control" name="users_id" value="${messages.users_id.id}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="model_id" value="${messages.model_id.model}">
+                                <input type="text" class="form-control" name="model_id" value="${messages.model_id.id}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="brand_id" value="${messages.brand_id.brand}">
+                                <input type="text" class="form-control" name="brand_id" value="${messages.brand_id.id}">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="defects" value="${messages.defects}">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <button type="submit" class="btn btn-primary" >Сохранить</button>
                             </div>
                         </form>
                     </div>

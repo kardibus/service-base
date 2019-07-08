@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" name="date_Open" placeholder="Поступление в ремонт" id="dateOpen">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="date_Close" placeholder="Дата окончания ремонта">
+                <input type="text" class="form-control" name="date_Close" placeholder="Дата окончания ремонта" id="dateClose">
             </div>
             <div class="form-group" >
                 <input type="text" class="form-control" name="model_id" placeholder="Модел" id="modeldata1">
@@ -60,7 +60,15 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="statusOrder" placeholder="Статус заказа">
+                <input type="text" class="form-control" name="statusOrder" placeholder="Статус заказа" id="status">
+            </div>
+            <div class="form-group">
+                <select class="custom-select" id="inputGroupSelect04" onchange="C()">
+                    <option selected>Выберите статус заказа</option>
+                        <option value="Готов">Готов</option>
+                        <option value="Поступил в ремонт">Поступил в ремонт</option>
+                        <option value="Повтор">Повтор</option>
+                </select>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Добавить</button>
