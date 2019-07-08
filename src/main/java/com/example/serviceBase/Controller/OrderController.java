@@ -50,10 +50,10 @@ public class OrderController {
     }
 
     @PostMapping("/addOrder")
-    public String addOrder(@RequestParam int price,
-                           @RequestParam String serialnumber,
-                           @RequestParam String about_repair,
-                           @RequestParam String defects,
+    public String addOrder(@RequestParam(required = false) int price,
+                           @RequestParam(required = false) String serialnumber,
+                           @RequestParam(required = false) String about_repair,
+                           @RequestParam(required = false) String defects,
                            @RequestParam ("date_Open") String date_Open,
                            @RequestParam ("date_Close") String date_Close,
                            @RequestParam(name="users_id") Users users_id,

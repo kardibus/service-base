@@ -8,7 +8,7 @@
                 <input type="hidden" class="form-control" name="id" placeholder="№" />
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="price" placeholder="Цена ремонта">
+                <input type="text" class="form-control" name="price" placeholder="Цена ремонта" id="price">
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="serialnumber" placeholder="Серийный номер">
@@ -35,25 +35,25 @@
                 <input type="text" class="form-control" name="brand_id" placeholder="Бренд" id="branddata1">
             </div>
 
-            <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect01" onchange="U()">
-                    <option selected>Выберите владельца</option>
+            <div class="form-group" >
+                <select  class="js-example-basic-single" id="inputGroupSelect01" onchange="U()" >
+                    <option selected>Выберите клиента</option>
                     <#list messageUsers as messagesUser>
                         <option value="${messagesUser.id}">${messagesUser.surname}</option>
                     </#list>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect02" onchange="M()">
-                    <option selected>Выберите владельца</option>
+                <select class="js-example-basic-single" id="inputGroupSelect02" onchange="M()">
+                    <option selected>Выберите модель</option>
                     <#list messageModel as messagesModel>
                         <option value="${messagesModel.id}">${messagesModel.model}</option>
                     </#list>
                 </select>
             </div>
             <div class="form-group">
-                <select class="custom-select" id="inputGroupSelect03" onchange="B()">
-                    <option selected>Выберите владельца</option>
+                <select class="js-example-basic-single" id="inputGroupSelect03" onchange="B()">
+                    <option selected>Выберите бренд</option>
                     <#list messageBrand as messagesBrand>
                         <option value="${messagesBrand.id}">${messagesBrand.brand}</option>
                     </#list>

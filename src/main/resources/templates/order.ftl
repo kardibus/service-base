@@ -8,6 +8,7 @@
             var result=date.getFullYear() +"-"+ date.getMonth()+"-"+ date.getDate()+" "+ date.getHours()+":"+ date.getMinutes()+":"+ date.getSeconds();
             document.getElementById('dateClose').value= result;
             document.getElementById('dateOpen').value = result;
+            document.getElementById('price').value=0;
         };
 
         function M() {
@@ -23,8 +24,13 @@
             var a = document.getElementById('inputGroupSelect04').value;
             document.getElementById('status').value = a;
         }
-
+        function dateClose(n) {
+            var date =new Date();
+            var result=date.getFullYear() +"-"+ date.getMonth()+"-"+ date.getDate()+" "+ date.getHours()+":"+ date.getMinutes()+":"+ date.getSeconds();
+            document.getElementById('dateCloseOrder'+n).value= result;
+        }
     </script>
+
      <script src="js/main.js"></script>
 <#include  "parts/orderTableAdd.ftl">
 
@@ -79,10 +85,13 @@
                                 <input type="text" class="form-control" name="serialnumber" value="${messages.serialnumber}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="date_Open" value="${messages.date_Open?string("yyyy-MM-dd HH:mm:ss")}">
+                                <input type="hidden" class="form-control" name="date_Open" value="${messages.date_Open?string("yyyy-MM-dd HH:mm:ss")}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="date_Close" value="${messages.date_Close?string("yyyy-MM-dd HH:mm:ss")}">
+                                <input type="text" class="form-control" name="date_Close" value="${messages.date_Close?string("yyyy-MM-dd HH:mm:ss")}" id="dateCloseOrder${messages.id}">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" onclick="dateClose(${messages.id})">Обновить дату выдачи</button>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="statusOrder" value="${messages.statusOrder}">
